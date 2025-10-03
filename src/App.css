@@ -32,7 +32,6 @@ body,
   padding-top: 0;
 }
 
-/* Main content areas */
 .main-content {
   min-height: calc(100vh - 64px);
   display: flex;
