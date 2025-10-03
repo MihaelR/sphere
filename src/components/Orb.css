@@ -1,0 +1,24 @@
+.c-orb.orb-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 48px;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  background: transparent; /* ensure background is transparent */
+}
+
+.orb-canvas-container {
+  width: 600px;
+  height: 420px;
+  min-width: 400px;
+  min-height: 280px;
+  background: transparent; /* transparent so stars show through */
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* You can adjust .orb-canvas-container width/height as needed for your app */
