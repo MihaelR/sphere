@@ -1,252 +1,233 @@
 import React from "react";
 
 export default function About() {
-  const features = [
-    {
-      icon: "🌌",
-      title: "Immersive 3D Universe",
-      description:
-        "Experience stunning 3D orbs in an interactive cosmic environment.",
-    },
-    {
-      icon: "🔗",
-      title: "Blockchain Native",
-      description:
-        "Built on Ethereum with smart contracts ensuring true ownership.",
-    },
-    {
-      icon: "🎨",
-      title: "Generative Art",
-      description:
-        "Each orb is algorithmically generated with unique properties.",
-    },
-    {
-      icon: "💫",
-      title: "Dynamic Rarity",
-      description: "Rarity levels evolve based on community interaction.",
-    },
-    {
-      icon: "🌐",
-      title: "Metaverse Ready",
-      description:
-        "MOONR orbs are designed for integration with virtual worlds.",
-    },
-    {
-      icon: "👥",
-      title: "Community Driven",
-      description: "Governance decisions are made by the community.",
-    },
-  ];
-
-  const team = [
+  const teamMembers = [
     {
       name: "Alex Chen",
       role: "Founder & CEO",
-      bio: "Former Meta engineer with 8+ years in blockchain technology.",
-      avatar: "👨‍💻",
+      avatar: "🚀",
+      bio: "Former blockchain architect at major DeFi protocols",
+      social: "@alexchen",
     },
     {
-      name: "Sarah Johnson",
-      role: "Lead Artist",
-      bio: "Digital artist and generative art pioneer.",
-      avatar: "👩‍🎨",
+      name: "Sarah Kim",
+      role: "CTO",
+      avatar: "⚡",
+      bio: "Full-stack developer with 8+ years in crypto",
+      social: "@sarahbuilds",
     },
     {
-      name: "Marcus Rodriguez",
-      role: "Blockchain Lead",
-      bio: "Smart contract expert and former Ethereum Foundation researcher.",
-      avatar: "🧑‍💼",
+      name: "Marcus Johnson",
+      role: "Head of Design",
+      avatar: "🎨",
+      bio: "Award-winning UI/UX designer from top tech companies",
+      social: "@marcusdesigns",
     },
     {
-      name: "Emily Zhang",
-      role: "Community Manager",
-      bio: "Community building expert with experience growing Web3 communities.",
-      avatar: "👩‍💼",
+      name: "Luna Rodriguez",
+      role: "Community Lead",
+      avatar: "🌙",
+      bio: "Building engaged communities in Web3 space",
+      social: "@lunacommunity",
+    },
+  ];
+
+  const milestones = [
+    {
+      date: "Q4 2023",
+      title: "Concept & Development",
+      description: "Initial concept development and team formation",
+      status: "completed",
+    },
+    {
+      date: "Q1 2024",
+      title: "MVP Launch",
+      description: "Core sphere functionality and basic interactions",
+      status: "completed",
+    },
+    {
+      date: "Q2 2024",
+      title: "Token Launch",
+      description: "MOONR token launch on Solana",
+      status: "current",
+    },
+    {
+      date: "Q3 2024",
+      title: "Enhanced Features",
+      description: "Advanced orb mechanics and governance",
+      status: "upcoming",
+    },
+    {
+      date: "Q4 2024",
+      title: "Ecosystem Expansion",
+      description: "Partnerships and cross-chain integration",
+      status: "upcoming",
     },
   ];
 
   return (
-    <div className="page-content">
-      {/* Hero Section - More Compact */}
-      <div className="content-card mb-6 text-center max-w-4xl">
-        <h1 className="text-4xl font-bold mb-4 text-gradient">About MOONR</h1>
-        <p className="text-lg leading-relaxed mb-6 text-center">
-          MOONR is a revolutionary NFT platform that combines cutting-edge 3D
-          visualization with blockchain technology to create an immersive
-          digital collectibles experience.
-        </p>
-        <div className="flex flex-wrap gap-3 justify-center">
-          <span className="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm font-medium">
-            10,000 Unique Orbs
-          </span>
-          <span className="px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-300 text-sm font-medium">
-            3D Interactive Experience
-          </span>
-          <span className="px-3 py-1 bg-green-500/20 border border-green-500/30 rounded-full text-green-300 text-sm font-medium">
-            Community Owned
-          </span>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 p-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-white mb-6">
+            About{" "}
+            <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              MOONR
+            </span>
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            A revolutionary decentralized platform that combines interactive 3D
+            experiences with blockchain technology, creating a new paradigm for
+            digital ownership and community engagement.
+          </p>
         </div>
-      </div>
 
-      {/* Mission Section - Smaller */}
-      <div className="content-card mb-6 max-w-4xl">
-        <h2 className="text-accent mb-4 text-center text-xl">Our Mission</h2>
-        <div className="grid md:grid-cols-2 gap-6 items-center">
-          <div>
-            <p className="text-base leading-relaxed mb-3">
-              We believe that digital ownership should be beautiful, meaningful,
-              and accessible. MOONR transforms the traditional NFT experience by
-              providing an immersive 3D environment where collectors can truly
-              interact with their digital assets.
-            </p>
-            <p className="text-base leading-relaxed">
-              Our vision extends beyond simple ownership - we're creating a
-              platform where art, technology, and community converge to build
-              the next generation of digital experiences.
+        {/* Vision & Mission */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+          <div className="bg-gradient-to-br from-purple-900/40 via-blue-900/40 to-purple-900/40 backdrop-blur-xl rounded-2xl border border-purple-500/30 shadow-2xl p-8">
+            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+              <span>🌟</span> Our Vision
+            </h2>
+            <p className="text-gray-300 leading-relaxed">
+              To create the most engaging and rewarding decentralized community
+              platform where digital interactions transcend traditional
+              boundaries. We envision a future where every user action has
+              meaning, value, and contributes to a thriving ecosystem.
             </p>
           </div>
-          <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-6 border border-blue-500/20">
+
+          <div className="bg-gradient-to-br from-blue-900/40 via-cyan-900/40 to-blue-900/40 backdrop-blur-xl rounded-2xl border border-blue-500/30 shadow-2xl p-8">
+            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+              <span>🎯</span> Our Mission
+            </h2>
+            <p className="text-gray-300 leading-relaxed">
+              To democratize access to immersive digital experiences while
+              rewarding community participation through innovative tokenomics.
+              We're building the infrastructure for the next generation of
+              decentralized applications.
+            </p>
+          </div>
+        </div>
+
+        {/* What Makes MOONR Special */}
+        <div className="bg-gradient-to-br from-green-900/40 via-emerald-900/40 to-green-900/40 backdrop-blur-xl rounded-2xl border border-green-500/30 shadow-2xl p-8 mb-12">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            <span>✨</span> What Makes MOONR Special
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="text-4xl mb-3">🚀</div>
-              <h3 className="text-lg font-bold text-blue-300 mb-2">
-                Innovation First
+              <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🌐</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Interactive 3D Universe
               </h3>
-              <p className="text-sm text-gray-300">
-                Pushing the boundaries of what's possible in the NFT space.
+              <p className="text-gray-300">
+                Explore a dynamic sphere with unique orbs, each offering
+                different experiences and rewards.
               </p>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Features Grid - More Compact */}
-      <div className="content-card mb-6 max-w-4xl">
-        <h2 className="text-accent mb-6 text-center text-xl">
-          Platform Features
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-xl p-4 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300"
-            >
-              <div className="text-3xl mb-3">{feature.icon}</div>
-              <h3 className="text-base font-bold text-blue-300 mb-2">
-                {feature.title}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">💎</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                True Ownership
               </h3>
-              <p className="text-sm text-gray-300 leading-relaxed">
-                {feature.description}
+              <p className="text-gray-300">
+                Built on Solana blockchain ensuring transparent, secure, and
+                true digital ownership.
               </p>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Technology Stack - Smaller */}
-      <div className="content-card mb-6 max-w-4xl">
-        <h2 className="text-accent mb-6 text-center text-xl">
-          Technology Stack
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="text-center">
-            <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-              <span className="text-xl">⚛️</span>
-            </div>
-            <h3 className="text-base font-bold text-blue-300 mb-2">Frontend</h3>
-            <p className="text-sm text-gray-300">
-              React, Three.js, WebGL for immersive 3D experiences
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-              <span className="text-xl">🔗</span>
-            </div>
-            <h3 className="text-base font-bold text-purple-300 mb-2">
-              Blockchain
-            </h3>
-            <p className="text-sm text-gray-300">
-              Ethereum, Solidity smart contracts, IPFS storage
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-              <span className="text-xl">🎨</span>
-            </div>
-            <h3 className="text-base font-bold text-green-300 mb-2">
-              Art Engine
-            </h3>
-            <p className="text-sm text-gray-300">
-              Custom algorithms for procedural generation
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Team Section - More Compact */}
-      <div className="content-card mb-6 max-w-4xl">
-        <h2 className="text-accent mb-6 text-center text-xl">Meet Our Team</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {team.map((member, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-b from-gray-800/50 to-gray-900/50 rounded-xl p-4 border border-gray-700/50 text-center hover:border-blue-500/30 transition-all duration-300"
-            >
-              <div className="text-3xl mb-3">{member.avatar}</div>
-              <h3 className="text-base font-bold text-blue-300 mb-1">
-                {member.name}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🤝</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Community Driven
               </h3>
-              <p className="text-sm text-purple-300 mb-2 font-medium">
-                {member.role}
-              </p>
-              <p className="text-xs text-gray-300 leading-relaxed">
-                {member.bio}
+              <p className="text-gray-300">
+                Governance token holders shape the future through democratic
+                decision-making.
               </p>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Stats Section - Compact */}
-      <div className="content-card mb-6 max-w-4xl">
-        <h2 className="text-accent mb-6 text-center text-xl">
-          Platform Statistics
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-blue-400 mb-1">10,000</div>
-            <p className="text-sm text-gray-400">Total Orbs</p>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-purple-400 mb-1">3,247</div>
-            <p className="text-sm text-gray-400">Minted</p>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-green-400 mb-1">892</div>
-            <p className="text-sm text-gray-400">Owners</p>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-yellow-400 mb-1">127.5</div>
-            <p className="text-sm text-gray-400">ETH Volume</p>
           </div>
         </div>
-      </div>
 
-      {/* Call to Action - Smaller */}
-      <div className="content-card text-center bg-gradient-to-br from-blue-900/30 to-purple-900/30 border-blue-500/30 max-w-2xl">
-        <h2 className="text-xl font-bold text-white mb-3">
-          Ready to Join the MOONR Universe?
-        </h2>
-        <p className="text-base text-gray-300 mb-4">
-          Explore our collection and become part of the future of digital
-          ownership.
-        </p>
-        <div className="flex flex-wrap gap-3 justify-center">
-          <a href="/buy" className="btn-primary text-sm px-4 py-2">
-            Explore Collection
-          </a>
-          <a href="/community" className="btn-secondary text-sm px-4 py-2">
-            Join Community
-          </a>
+        {/* Team Section */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            <span>👥</span> Meet Our Team
+          </h2>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {teamMembers.map((member, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-purple-900/40 via-blue-900/40 to-purple-900/40 backdrop-blur-xl rounded-2xl border border-purple-500/30 shadow-2xl p-6 text-center"
+              >
+                <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-3xl">{member.avatar}</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-purple-400 font-medium mb-3">
+                  {member.role}
+                </p>
+                <p className="text-gray-300 text-sm mb-3">{member.bio}</p>
+                <p className="text-blue-400 text-sm">{member.social}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Roadmap */}
+        <div className="bg-gradient-to-br from-gray-900/40 via-purple-900/40 to-gray-900/40 backdrop-blur-xl rounded-2xl border border-purple-500/30 shadow-2xl p-8">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            <span>🗺️</span> Development Roadmap
+          </h2>
+
+          <div className="space-y-6">
+            {milestones.map((milestone, index) => (
+              <div key={index} className="flex items-start gap-4">
+                <div
+                  className={`w-4 h-4 rounded-full mt-2 ${
+                    milestone.status === "completed"
+                      ? "bg-green-500"
+                      : milestone.status === "current"
+                      ? "bg-yellow-500 animate-pulse"
+                      : "bg-gray-500"
+                  }`}
+                ></div>
+
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-purple-400 font-mono text-sm">
+                      {milestone.date}
+                    </span>
+                    <h3 className="text-white font-bold">{milestone.title}</h3>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        milestone.status === "completed"
+                          ? "bg-green-500/20 text-green-400"
+                          : milestone.status === "current"
+                          ? "bg-yellow-500/20 text-yellow-400"
+                          : "bg-gray-500/20 text-gray-400"
+                      }`}
+                    >
+                      {milestone.status}
+                    </span>
+                  </div>
+                  <p className="text-gray-300">{milestone.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

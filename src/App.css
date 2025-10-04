@@ -6,6 +6,9 @@ body,
 .App,
 * {
   font-family: "Inter", "Segoe UI", "Roboto", "Arial", sans-serif !important;
+  /* Enable hardware acceleration for smoother animations */
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 body,
@@ -25,11 +28,14 @@ body,
   position: relative;
   overflow-x: hidden;
   font-family: "Inter", "Segoe UI", "Roboto", "Arial", sans-serif;
+  margin: 0 auto;
+  padding-top: 0; /* Remove padding from App container */
 }
 
 .app-main {
   min-height: calc(100vh - 64px);
   padding-top: 0;
+  width: 100%;
 }
 
 .main-content {
@@ -37,6 +43,233 @@ body,
   display: flex;
   flex-direction: column;
   position: relative;
+  width: 100%;
+  max-width: 1200px;
+  /*   border: 1px solid white; */
+  margin: 0 auto;
+}
+
+/* Main sphere layout - adjusted for 1200px */
+.sphere-main-layout {
+  border: 1px solid darkslategrey;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+/* Left Sidebar: smaller for 1200px layout */
+.left-sidebar {
+  border: 1px solid darkcyan;
+  flex: 0 0 auto;
+  width: 280px;
+  min-width: 260px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Center: Big Sphere Container - optimized for 1200px */
+.center-sphere-container {
+  border: 1px solid darkolivegreen;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.center-sphere-container .orb-wrapper {
+  width: 100%;
+  max-width: 450px;
+  min-width: 350px;
+}
+
+.center-sphere-container .stats-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Right Sidebar: adjusted for 1200px layout */
+.right-sidebar {
+  border: 1px solid darkorange;
+  flex: 0 0 auto;
+  width: 320px;
+  min-width: 300px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  height: 900px; /* Set fixed height */
+  max-height: 900px;
+}
+
+/* Chat container to match token info width */
+.chat-container {
+  width: 100%;
+}
+
+.chat-container > div {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Hide old layout styles */
+.sphere-layout {
+  display: none;
+}
+
+.search-token-row {
+  display: none;
+}
+
+.sphere-info-row {
+  display: none;
+}
+
+.info-panel-wrapper {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+  .sphere-main-layout {
+    gap: 1.5rem;
+    max-width: 1400px;
+  }
+
+  .left-sidebar,
+  .right-sidebar {
+    width: 320px;
+    min-width: 300px;
+  }
+
+  .center-sphere-container .orb-wrapper {
+    max-width: 500px;
+    min-width: 350px;
+  }
+
+  .sphere-info-row {
+    gap: 1.5rem;
+  }
+
+  .sphere-info-row .orb-wrapper {
+    width: 450px;
+    min-width: 350px;
+  }
+
+  .info-panel-wrapper {
+    width: 280px;
+    min-width: 260px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .App {
+    max-width: 100%;
+  }
+
+  .sphere-main-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 100%;
+  }
+
+  .left-sidebar,
+  .right-sidebar {
+    width: 100%;
+    max-width: 500px;
+    min-width: auto;
+  }
+
+  .center-sphere-container .orb-wrapper {
+    max-width: 500px;
+    min-width: 300px;
+  }
+
+  /* Stack order for mobile */
+  .left-sidebar {
+    order: 1;
+  }
+
+  .center-sphere-container {
+    order: 2;
+  }
+
+  .right-sidebar {
+    order: 3;
+  }
+
+  .sphere-info-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .left-sidebar,
+  .right-sidebar,
+  .sphere-info-row .orb-wrapper,
+  .info-panel-wrapper {
+    width: 100%;
+    max-width: 500px;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .sphere-main-layout {
+    padding: 0;
+    gap: 1.5rem;
+  }
+
+  .left-sidebar,
+  .right-sidebar,
+  .center-sphere-container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .center-sphere-container .orb-wrapper {
+    min-width: 280px;
+  }
+
+  .sphere-info-row .orb-wrapper {
+    min-width: 280px;
+  }
+}
+
+/* Update marquee positioning */
+.marquee-below-header {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  background: 1px solid grey;
+}
+
+/* TopOwners positioning */
+.top-owners-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Sphere layout */
@@ -124,17 +357,96 @@ body,
   margin-bottom: 1rem;
 }
 
-/* Update marquee container to full width */
+/* New Top Section Layout - positioned below header */
+.top-section-new {
+  display: none;
+}
+
+.search-container-left {
+  flex: 0 0 auto;
+  min-width: 280px;
+}
+
+.marquee-container-center {
+  display: none;
+}
+
+.token-container-right {
+  flex: 0 0 auto;
+  min-width: 250px; /* Increased slightly to accommodate chart */
+  max-width: 290px; /* Increased slightly to accommodate chart */
+}
+
+/* Search and Token Info row */
+.search-token-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive adjustments for new layout */
+@media (max-width: 1200px) {
+  .search-token-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .search-container-left,
+  .token-container-right {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .top-section-new {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .c-images-marquee-container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-token-row {
+    padding: 0 0.5rem;
+  }
+
+  .search-container-left,
+  .token-container-right {
+    max-width: none;
+  }
+
+  .top-section-new {
+    padding: 0 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .c-images-marquee-container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Update marquee container positioning */
 .c-images-marquee-container {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
   margin-bottom: 0;
   padding: 0;
-  width: 100%;
-  margin-bottom: 1rem;
-  padding: 0 1rem;
   display: block;
   visibility: visible;
+}
+
+.c-images-marquee-track {
+  animation: images-marquee-scroll-rtl 80s linear infinite; /* Much faster - changed from 300s to 80s */
+  will-change: transform;
 }
 
 /* Token info is compact on the right */
@@ -567,7 +879,8 @@ h6,
     843px 1902px #fff, 15px 1454px #fff, 539px 1420px #fff, 1856px 974px #fff,
     340px 663px #fff, 1579px 1091px #fff, 809px 111px #fff, 32px 1128px #fff,
     69px 1852px #fff, 878px 300px #fff, 730px 726px #fff, 1137px 68px #fff;
-  animation: animStar 50s linear infinite;
+  animation: animStar 120s linear infinite; /* Even slower animation */
+  will-change: transform; /* Optimize for animations */
 }
 
 #stars2 {
@@ -625,7 +938,8 @@ h6,
     1244px 30px #fff, 1144px 1873px #fff, 1276px 958px #fff, 1675px 1097px #fff,
     354px 1735px #fff, 1534px 235px #fff, 560px 1850px #fff, 493px 1737px #fff,
     782px 598px #fff, 1709px 1377px #fff, 717px 1040px #fff;
-  animation: animStar 100s linear infinite;
+  animation: animStar 240s linear infinite; /* Even slower animation */
+  will-change: transform;
 }
 
 #stars3 {
@@ -658,16 +972,15 @@ h6,
     1088px 1583px #fff, 1840px 1126px #fff, 500px 111px #fff, 1263px 667px #fff,
     1748px 121px #fff, 1608px 364px #fff, 1064px 1610px #fff, 1682px 1826px #fff,
     1747px 1800px #fff;
-  animation: animStar 150s linear infinite;
+  animation: animStar 360s linear infinite; /* Even slower animation */
+  will-change: transform;
 }
 
-@keyframes animStar {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-2000px);
-  }
+/* Optimize hover effects */
+.group:hover .c-images-marquee-img,
+.group:focus .c-images-marquee-img {
+  transform: scale(1.5);
+  will-change: transform;
 }
 
 .btn-primary {

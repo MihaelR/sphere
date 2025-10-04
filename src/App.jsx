@@ -1,44 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import { AppProvider } from "./context/AppContext";
 import Orb from "./components/Orb";
 import ImagesMarquee from "./components/ImagesMarquee";
 import Header from "./components/Header";
-import OrbInfoPanel from "./components/OrbInfoPanel";
 import SphereSearch from "./components/SphereSearch";
 import SphereStats from "./components/SphereStats";
-import TopOwners from "./components/TopOwners";
-import LiveActivityFeed from "./components/LiveActivityFeed";
 import NewsUpdates from "./components/NewsUpdates";
 import SpotifyPlayer from "./components/SpotifyPlayer";
-import TokenInfoBanner from "./components/TokenInfoBanner";
 import Buy from "./pages/Buy";
 import About from "./pages/About";
 import Governance from "./pages/Governance";
 import Community from "./pages/Community";
-import OrbComments from "./components/OrbComments";
+import ChatInfoTabs from "./components/ChatInfoTabs";
+import TokenInfoTabs from "./components/TokenInfoTabs";
+import { useAppContext } from "./context/AppContext";
 
 function SphereMain() {
-  const [selected, setSelected] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
-  const [lastSearchIndex, setLastSearchIndex] = useState(null);
-  const totalImages = 30;
-  const totalItems = 100;
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const num = parseInt(searchValue, 10);
-    if (!isNaN(num) && num >= 1 && num <= totalItems) {
-      setSelected(num - 1);
-      setLastSearchIndex(num - 1);
-    }
-  };
-
-  const handleMarqueeImageClick = (imgIndex) => {
-    setSelected(imgIndex);
-    setSearchValue((imgIndex + 1).toString());
-    setLastSearchIndex(imgIndex);
-  };
+  const {
+    selected,
+    totalImages,
+    totalItems,
+    handleMarqueeImageClick,
+    setSelected,
+  } = useAppContext();
 
   return (
     <div className="main-content">
@@ -46,73 +32,51 @@ function SphereMain() {
       <div id="stars2"></div>
       <div id="stars3"></div>
 
-      {/* Marquee and Token Info in same line */}
-      <div className="top-section">
-        <div className="c-images-marquee-container">
-          <ImagesMarquee
-            totalImages={totalImages}
-            onImageClick={handleMarqueeImageClick}
-          />
-        </div>
-        <div className="token-info-container">
-          <TokenInfoBanner />
-        </div>
+      {/* Marquee directly below header */}
+      <div className="marquee-below-header">
+        <ImagesMarquee
+          totalImages={totalImages}
+          onImageClick={handleMarqueeImageClick}
+        />
       </div>
 
-      {/* Main horizontal layout: (search + info + comments) | orb | chat + activity */}
-      <div className="sphere-layout">
-        {/* Search, OrbInfoPanel, and Comments (left of sphere) */}
-        <div className="info-panel-container">
-          {/* Search component above info */}
-          <div className="mb-3">
-            <SphereSearch
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-              handleSearch={handleSearch}
-              totalItems={totalItems}
-            />
+      {/* Main layout: Left (Token+Search) | Center sphere | Right (Combined Chat+Info) */}
+      <div className="sphere-main-layout">
+        {/* Left Sidebar: Token Info + Top Holders tabs, Search bottom */}
+        <div className="left-sidebar">
+          {/* Token Info + Top Holders Tabs */}
+          <div className="mb-4">
+            <TokenInfoTabs />
           </div>
 
-          {/* Orb Info Panel */}
-          <div className="mb-3">
-            <OrbInfoPanel selected={selected} totalImages={totalImages} />
+          {/* Search */}
+          <div>
+            <SphereSearch />
           </div>
-
-          {/* Comments below info panel */}
-          <OrbComments selected={selected} totalImages={totalImages} />
         </div>
 
-        {/* Orb (center) */}
-        <div className="orb-container">
+        {/* Center: Big Sphere Container */}
+        <div className="center-sphere-container">
           {/* Orb */}
           <div className="orb-wrapper">
             <Orb
               selected={selected}
               setSelected={setSelected}
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
               totalImages={totalImages}
               totalItems={totalItems}
-              handleSearch={handleSearch}
-              lastSearchIndex={lastSearchIndex}
             />
           </div>
 
-          {/* Stats below orb */}
+          {/* Stats below sphere */}
           <div className="stats-container">
             <SphereStats />
           </div>
         </div>
 
-        {/* Chat/activity widgets (right) */}
-        <div className="chat-widgets-container">
-          <LiveActivityFeed />
+        {/* Right Sidebar: Combined Chat + Info Panel with Tabs */}
+        <div className="right-sidebar">
+          <ChatInfoTabs />
         </div>
-      </div>
-
-      {/* TopOwners below */}
-      <div className="top-owners-container">
-        <TopOwners />
       </div>
 
       <NewsUpdates />
@@ -123,21 +87,23 @@ function SphereMain() {
 export default function App() {
   return (
     <Router>
-      <div className="App">
-        <Header />
-        {/* Global Music Player - appears on all pages */}
-        <SpotifyPlayer />
+      <AppProvider>
+        <div className="App">
+          <Header />
+          {/* Global Music Player - appears on all pages */}
+          <SpotifyPlayer />
 
-        <main className="app-main">
-          <Routes>
-            <Route path="/" element={<SphereMain />} />
-            <Route path="/buy" element={<Buy />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/governance" element={<Governance />} />
-            <Route path="/community" element={<Community />} />
-          </Routes>
-        </main>
-      </div>
+          <main className="app-main">
+            <Routes>
+              <Route path="/" element={<SphereMain />} />
+              <Route path="/buy" element={<Buy />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/governance" element={<Governance />} />
+              <Route path="/community" element={<Community />} />
+            </Routes>
+          </main>
+        </div>
+      </AppProvider>
     </Router>
   );
 }

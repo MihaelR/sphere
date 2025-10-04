@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useAppContext } from "../context/AppContext";
 import "./ImagesMarquee.css";
 
 // Helper to check if an image is "empty" (mostly grey)
@@ -31,6 +32,7 @@ function isImageGrey(img) {
 }
 
 export default function ImagesMarquee({ totalImages, onImageClick }) {
+  const { getSpotData } = useAppContext();
   const [validImages, setValidImages] = useState([]);
 
   useEffect(() => {
@@ -60,6 +62,12 @@ export default function ImagesMarquee({ totalImages, onImageClick }) {
     };
   }, [totalImages]);
 
+  // Get spot name for display
+  const getSpotName = (spotNumber) => {
+    const spotData = getSpotData(spotNumber);
+    return spotData?.name || `Spot #${spotNumber}`;
+  };
+
   // Duplicate for seamless infinite scroll
   const allImages = [...validImages, ...validImages];
 
@@ -80,16 +88,16 @@ export default function ImagesMarquee({ totalImages, onImageClick }) {
                 <img
                   src={`/src/assets/img${imgNum}.png`}
                   alt={`img${imgNum}`}
-                  className="c-images-marquee-img group-hover:scale-150"
+                  className="c-images-marquee-img group-hover:scale-125"
                   draggable={false}
                 />
-                {/* Number overlay on hover */}
+                {/* Field number overlay on hover */}
                 <span className="c-images-marquee-number-overlay">
                   #{imgNum}
                 </span>
               </span>
               <span className="c-images-marquee-label group-hover:scale-150">
-                {`img${imgNum}.png`}
+                {getSpotName(imgNum)}
               </span>
             </span>
           ))}

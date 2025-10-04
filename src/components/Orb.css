@@ -19,6 +19,6 @@
   overflow: hidden;
   position: relative;
   z-index: 1;
+  border: 1px solid greenyellow;
 }
-
 /* You can adjust .orb-canvas-container width/height as needed for your app */

@@ -1,378 +1,309 @@
 import React, { useState, useEffect } from "react";
+import { useAppContext } from "../context/AppContext";
 
-export default function OrbInfoPanel({ selected, totalImages }) {
+export default function OrbInfoPanel({ isTabbed = false }) {
+  const { selectedSpotNumber, getSpotData, totalImages } = useAppContext();
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(
-    Math.floor(Math.random() * 50) + 10
-  );
-  const [rating, setRating] = useState(Math.floor(Math.random() * 5) + 1);
-  const [userRating, setUserRating] = useState(0);
-  const [showMetadata, setShowMetadata] = useState(false);
-  const [visitorCount, setVisitorCount] = useState(
-    Math.floor(Math.random() * 500) + 100
-  );
-  const [totalLikes, setTotalLikes] = useState(
-    Math.floor(Math.random() * 200) + 50
-  );
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
 
-  const orbNumber = selected !== null ? selected + 1 : null;
-  const isOwned = orbNumber && orbNumber <= 67;
-  const price = orbNumber
-    ? orbNumber <= 67
-      ? "SOLD"
-      : `${(0.5 + Math.random() * 2).toFixed(2)} ETH`
-    : "---";
-
-  // Mock data
-  const creationDate = orbNumber
-    ? new Date(2024, 0, orbNumber).toLocaleDateString()
-    : "---";
-  const tokenId = orbNumber
-    ? `#${orbNumber.toString().padStart(4, "0")}`
-    : "---";
-  const contractAddress = "0x1234...5678";
-  const fileSize = orbNumber
-    ? `${(2.1 + Math.random() * 3).toFixed(1)} MB`
-    : "---";
-  const format = "PNG";
-  const dimensions = "1024x1024";
-
-  const getImagePath = (index) => {
-    if (index === null || index < 0) return null;
-    const imageNumber = (index % totalImages) + 1;
-    try {
-      return new URL(`../assets/img${imageNumber}.png`, import.meta.url).href;
-    } catch (error) {
-      console.warn(`Image img${imageNumber}.png not found`);
-      return null;
-    }
-  };
-
-  const getOrbName = (index) => {
-    if (index === null || index < 0) return null;
-    const imageNumber = (index % totalImages) + 1;
-    const names = [
-      "Celestial Nexus",
-      "Cosmic Drift",
-      "Stellar Bloom",
-      "Void Echo",
-      "Aurora Pulse",
-      "Nebula Heart",
-      "Quantum Sphere",
-      "Solar Flare",
-      "Galactic Core",
-      "Astral Ring",
-      "Lunar Shadow",
-      "Crystal Vortex",
-      "Plasma Wave",
-      "Dark Matter",
-      "Stardust",
-      "Infinity Loop",
-      "Cosmic Web",
-      "Black Hole",
-      "Supernova",
-      "Meteor Shower",
-      "Galaxy Spiral",
-      "Space Dust",
-      "Comet Trail",
-      "Planet Ring",
-      "Solar Wind",
-      "Cosmic Ray",
-      "Star Forge",
-      "Void Portal",
-      "Energy Field",
-      "Time Warp",
-    ];
-    return names[(imageNumber - 1) % names.length];
-  };
-
-  const imagePath = getImagePath(selected);
-  const orbName = getOrbName(selected);
-
-  React.useEffect(() => {
-    setImageError(false);
-    setLiked(false);
-    setLikeCount(Math.floor(Math.random() * 50) + 10);
-    setRating(Math.floor(Math.random() * 5) + 1);
-    setUserRating(0);
-    setShowMetadata(false);
-    setVisitorCount(Math.floor(Math.random() * 500) + 100);
-    setTotalLikes(Math.floor(Math.random() * 200) + 50);
-  }, [selected]);
-
-  // Simulate visitor count changes
+  // Reset image states and like state when selection changes
   useEffect(() => {
-    const interval = setInterval(() => {
-      setVisitorCount((prev) => prev + Math.floor(Math.random() * 3));
-      if (Math.random() < 0.3) {
-        // 30% chance to add a like
-        setTotalLikes((prev) => prev + 1);
-      }
-    }, 10000);
+    setImageLoaded(false);
+    setImageError(false);
 
-    return () => clearInterval(interval);
-  }, []);
+    // Set initial like count from spot data
+    const spotInfo = getSpotData(selectedSpotNumber);
+    setLikeCount(spotInfo?.likes || 0);
+  }, [selectedSpotNumber, getSpotData]);
 
-  const handleLike = () => {
-    if (liked) {
-      setLiked(false);
+  // Get spot data using context function - only returns data for spots 1-14
+  const spotInfo = getSpotData(selectedSpotNumber);
+  console.log("spotInfo", spotInfo);
+  const hasImage = selectedSpotNumber && selectedSpotNumber <= totalImages;
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+    setImageError(false);
+  };
+
+  const handleImageError = () => {
+    setImageLoaded(false);
+    setImageError(true);
+  };
+
+  // Handle like/unlike functionality
+  const handleLikeToggle = () => {
+    if (isLiked) {
+      setIsLiked(false);
       setLikeCount((prev) => prev - 1);
+      console.log(`🔍 [OrbInfoPanel] Unliked spot ${selectedSpotNumber}`);
     } else {
-      setLiked(true);
+      setIsLiked(true);
       setLikeCount((prev) => prev + 1);
+      console.log(`🔍 [OrbInfoPanel] Liked spot ${selectedSpotNumber}`);
     }
-  };
-
-  const handleShare = (platform) => {
-    const shareText = `Check out ${orbName} #${orbNumber} on MOONR!`;
-    const url = window.location.href + `?orb=${orbNumber}`;
-
-    switch (platform) {
-      case "twitter":
-        window.open(
-          `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-            shareText
-          )}&url=${encodeURIComponent(url)}`,
-          "_blank"
-        );
-        break;
-      case "discord":
-        navigator.clipboard.writeText(`${shareText} ${url}`).then(() => {
-          alert("Discord message copied to clipboard!");
-        });
-        break;
-      default:
-        navigator.clipboard.writeText(`${shareText} ${url}`).then(() => {
-          alert("Link copied to clipboard!");
-        });
-    }
-  };
-
-  const handleRating = (stars) => {
-    setUserRating(stars);
-  };
-
-  const renderStars = (currentRating, interactive = false) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span
-        key={i}
-        className={`cursor-${interactive ? "pointer" : "default"} text-xs ${
-          i < currentRating ? "text-yellow-400" : "text-gray-400"
-        }`}
-        onClick={interactive ? () => handleRating(i + 1) : undefined}
-      >
-        ★
-      </span>
-    ));
-  };
-
-  const getRarityBadge = (orbNum) => {
-    if (!orbNum) return null;
-    const rarity =
-      orbNum <= 10 ? "Legendary" : orbNum <= 30 ? "Rare" : "Common";
-    const colors = {
-      Legendary: "bg-purple-500 text-white",
-      Rare: "bg-blue-500 text-white",
-      Common: "bg-gray-500 text-white",
-    };
-    return (
-      <span
-        className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${colors[rarity]}`}
-      >
-        {rarity}
-      </span>
-    );
   };
 
   return (
-    <div className="w-64 max-w-full rounded-xl shadow-lg p-3 flex flex-col items-center bg-base-200 bg-opacity-80 max-h-[70vh] overflow-y-auto">
-      {/* Visitor Count Header */}
-      <div className="w-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-2 mb-2 border border-blue-500/30">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-xs font-medium text-blue-300">
-              {visitorCount.toLocaleString()} visitors
-            </span>
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="text-xs">❤️</span>
-            <span className="text-xs font-medium text-red-300">
-              {totalLikes.toLocaleString()} likes
-            </span>
-          </div>
-        </div>
-      </div>
+    <div className="h-full p-4 overflow-y-auto bg-black/20 backdrop-blur-sm scrollbar-thin scrollbar-thumb-purple-500/50 scrollbar-track-transparent">
+      {selectedSpotNumber ? (
+        <div className="space-y-4">
+          {/* Image Display - Only show for spots with images (1-14) */}
+          {hasImage ? (
+            <div className="relative group">
+              <div className="aspect-square rounded-xl overflow-hidden border-2 border-purple-500/30 shadow-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20">
+                {/* Loading State */}
+                <div
+                  className={`w-full h-full flex items-center justify-center ${
+                    !imageLoaded && !imageError ? "visible" : "hidden"
+                  }`}
+                >
+                  <div className="w-8 h-8 border-2 border-purple-400 border-t-transparent rounded-full animate-spin"></div>
+                </div>
 
-      {/* Orb Image Preview - Smaller */}
-      <div className="w-48 h-36 mb-2 rounded-lg overflow-hidden border-2 border-primary/30 bg-base-300 flex items-center justify-center">
-        {imagePath && !imageError ? (
-          <img
-            src={imagePath}
-            alt={`Orb #${orbNumber}`}
-            className="w-full h-full object-cover"
-            onError={() => {
-              console.log("Image failed to load:", imagePath);
-              setImageError(true);
-            }}
-            onLoad={() => {
-              console.log("Image loaded successfully:", imagePath);
-            }}
-          />
-        ) : (
-          <div className="text-xs text-center text-base-content/60">
-            {imagePath && imageError ? "No Image Available" : "No orb selected"}
-          </div>
-        )}
-      </div>
+                {/* Actual Image */}
+                <img
+                  src={
+                    spotInfo?.imageUrl ||
+                    `/src/assets/img${selectedSpotNumber}.png`
+                  }
+                  alt={`Planet Ring #${selectedSpotNumber}`}
+                  className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${
+                    imageLoaded && !imageError
+                      ? "visible"
+                      : "invisible absolute inset-0"
+                  }`}
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                />
 
-      {/* Title, Field Number, and Rarity Badge */}
-      <div className="w-full flex justify-between items-center mb-2">
-        <div className="font-bold text-sm text-base-content/80 truncate">
-          {orbName || "Select an Orb"}
-        </div>
-        <div className="flex items-center gap-1 flex-shrink-0">
-          <div className="text-primary font-mono font-semibold text-xs">
-            #{orbNumber || "---"}
-          </div>
-          {orbNumber && getRarityBadge(orbNumber)}
-        </div>
-      </div>
-
-      {/* Combined Rating & Social Actions - More Compact */}
-      {orbNumber && (
-        <div className="w-full bg-base-300 rounded-lg p-2 mb-3">
-          <div className="flex justify-between items-center mb-2">
-            {/* Rating Section */}
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1">
-                {renderStars(rating)}
-                <span className="text-[10px] text-base-content/60 ml-1">
-                  ({rating}/5)
-                </span>
+                {/* Image Error Fallback */}
+                <div
+                  className={`w-full h-full flex flex-col items-center justify-center text-purple-300 ${
+                    imageError ? "visible" : "hidden"
+                  }`}
+                >
+                  <div className="text-6xl mb-2">🖼️</div>
+                  <div className="text-lg font-bold">
+                    Spot #{selectedSpotNumber}
+                  </div>
+                  <div className="text-sm opacity-70">Image not available</div>
+                </div>
               </div>
-              <div className="flex items-center gap-1 mt-1">
-                <span className="text-[10px]">Rate:</span>
-                {renderStars(userRating, true)}
+
+              {/* Image Number Overlay */}
+              <div className="absolute top-3 left-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                #{selectedSpotNumber}
+              </div>
+
+              {/* Name Overlay - moved from below */}
+              {spotInfo && (
+                <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm text-white px-3 py-1 rounded-lg text-sm font-bold shadow-lg border border-white/20 max-w-[180px]">
+                  <div className="truncate">{spotInfo.name}</div>
+                </div>
+              )}
+
+              {/* Views and Likes Overlay - rearranged layout */}
+              {spotInfo && (
+                <div className="absolute bottom-3 left-3 right-3 flex justify-between items-end">
+                  {/* Views and Likes Count - Left side */}
+                  <div className="flex gap-2">
+                    <div
+                      className={`px-2 py-1 rounded-full text-xs font-bold border bg-black/80 backdrop-blur-sm border-cyan-500/50 text-cyan-400 flex items-center gap-1 shadow-lg`}
+                    >
+                      <span>👁️</span>
+                      <span>{spotInfo.views.toLocaleString()}</span>
+                    </div>
+                    <div
+                      className={`px-2 py-1 rounded-full text-xs font-bold border bg-black/80 backdrop-blur-sm border-red-500/50 text-red-400 flex items-center gap-1 shadow-lg`}
+                    >
+                      <span>❤️</span>
+                      <span>{likeCount.toLocaleString()}</span>
+                    </div>
+                  </div>
+
+                  {/* Like Button - Right side - Improved circular design */}
+                  <button
+                    data-like-button
+                    onClick={handleLikeToggle}
+                    className={`w-10 h-10 rounded-full border-2 transition-all duration-300 transform hover:scale-110 shadow-lg flex items-center justify-center ${
+                      isLiked
+                        ? "bg-gradient-to-br from-red-500/80 to-pink-500/80 border-red-400/60 text-white shadow-red-500/40"
+                        : "bg-black/90 border-gray-600/50 text-gray-400 hover:border-red-400/60 hover:text-red-300 hover:bg-red-500/20"
+                    }`}
+                  >
+                    <span className="text-base leading-none">
+                      {isLiked ? "❤️" : "🤍"}
+                    </span>
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Empty Spot Display - For spots 15-100 (no data) */
+            <div className="relative">
+              <div className="aspect-square rounded-xl overflow-hidden border-2 border-gray-500/30 shadow-lg bg-gradient-to-br from-gray-600/20 to-gray-700/20">
+                <div className="w-full h-full flex flex-col items-center justify-center text-gray-200">
+                  <div className="text-6xl mb-4">📍</div>
+                  <div className="text-2xl font-bold mb-2">
+                    Spot #{selectedSpotNumber}
+                  </div>
+                  <div className="text-sm opacity-80 text-center px-4">
+                    Empty Spot
+                  </div>
+                  <div className="text-xs opacity-70 mt-2">
+                    No data available
+                  </div>
+                </div>
+              </div>
+
+              {/* Spot Number Overlay */}
+              <div className="absolute top-3 left-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                #{selectedSpotNumber}
               </div>
             </div>
+          )}
 
-            {/* Like Button */}
-            <button
-              onClick={handleLike}
-              className={`flex items-center gap-1 px-2 py-1 rounded-full transition text-xs ${
-                liked
-                  ? "bg-red-500 text-white"
-                  : "bg-base-100 text-base-content hover:bg-red-500 hover:text-white"
-              }`}
-            >
-              <svg
-                className="w-3 h-3"
-                fill={liked ? "currentColor" : "none"}
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-              <span className="text-xs font-medium">{likeCount}</span>
-            </button>
-          </div>
-
-          {/* Share Buttons */}
-          <div className="flex gap-1 justify-center">
-            <button
-              onClick={() => handleShare("twitter")}
-              className="flex items-center gap-1 px-2 py-1 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition text-[10px]"
-            >
-              🐦 Share
-            </button>
-            <button
-              onClick={() => handleShare("discord")}
-              className="flex items-center gap-1 px-2 py-1 rounded-full bg-indigo-500 text-white hover:bg-indigo-600 transition text-[10px]"
-            >
-              💬 Discord
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Basic Info - More Compact */}
-      <div className="w-full space-y-2 mb-3">
-        <div className="flex justify-between text-xs">
-          <span className="font-semibold">Status:</span>
-          <span className={isOwned ? "text-success" : "text-warning"}>
-            {orbNumber ? (isOwned ? "Owned" : "Available") : "---"}
-          </span>
-        </div>
-
-        <div className="flex justify-between text-xs">
-          <span className="font-semibold">Price:</span>
-          <span className="font-mono">{price}</span>
-        </div>
-
-        <div className="flex justify-between text-xs">
-          <span className="font-semibold">Created:</span>
-          <span className="text-xs">{creationDate}</span>
-        </div>
-
-        {isOwned && (
-          <div className="flex justify-between text-xs">
-            <span className="font-semibold">Owner:</span>
-            <span className="text-[10px] font-mono">
-              0x{Math.random().toString(16).substr(2, 8)}...
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* Technical Details */}
-      {orbNumber && (
-        <div className="w-full space-y-1">
-          <button
-            onClick={() => setShowMetadata(!showMetadata)}
-            className="w-full text-left font-semibold text-xs text-primary hover:text-primary/80 transition"
-          >
-            {showMetadata ? "▼" : "▶"} Technical Details
-          </button>
-
-          {showMetadata && (
-            <div className="bg-base-300 rounded-lg p-2 space-y-1 text-xs">
-              <div className="flex justify-between">
-                <span>Token ID:</span>
-                <span className="font-mono">{tokenId}</span>
+          {/* Spot Information - Only show if we have data */}
+          {spotInfo ? (
+            <div className="space-y-3">
+              {/* Description only - name moved to overlay */}
+              <div className="text-center">
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  {spotInfo.description}
+                </p>
               </div>
-              <div className="flex justify-between">
-                <span>Contract:</span>
-                <span className="font-mono text-[10px]">{contractAddress}</span>
+
+              {/* Owner Info */}
+              <div className="bg-black/30 rounded-lg p-3 border border-cyan-500/30">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-cyan-300">
+                    Owner:
+                  </span>
+                  <span className="text-xs font-mono text-cyan-200">
+                    {spotInfo.owner}
+                  </span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span>File Size:</span>
-                <span>{fileSize}</span>
+
+              {/* Comments Section */}
+              <div className="bg-black/30 rounded-lg p-3 border border-purple-500/30 flex flex-col max-h-80">
+                <div className="flex items-center justify-between mb-3 flex-shrink-0">
+                  <div className="text-sm font-bold text-purple-300 flex items-center gap-2">
+                    <span>💬</span>
+                    <span>Comments ({spotInfo.commentsList?.length || 0})</span>
+                  </div>
+                  <button className="text-xs text-purple-400 hover:text-purple-300 transition-colors">
+                    View All
+                  </button>
+                </div>
+
+                {/* Scrollable Comments Container */}
+                <div
+                  className="flex-1 overflow-y-auto space-y-2 mb-3 min-h-0 pr-1"
+                  style={{
+                    scrollbarWidth: "thin",
+                    scrollbarColor: "rgba(168, 85, 247, 0.5) transparent",
+                  }}
+                >
+                  {/* Display actual comments from spot data */}
+                  {spotInfo.commentsList && spotInfo.commentsList.length > 0 ? (
+                    spotInfo.commentsList.map((comment) => (
+                      <div
+                        key={comment.id}
+                        className="bg-white/5 rounded-lg p-2 border border-purple-500/20"
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-xs">💬</span>
+                          <span className="text-xs font-medium text-purple-300">
+                            {comment.user}
+                          </span>
+                          <span className="text-xs text-gray-400">
+                            {comment.timestamp}
+                          </span>
+                        </div>
+                        <p className="text-xs text-gray-300">{comment.text}</p>
+                      </div>
+                    ))
+                  ) : (
+                    /* Fallback when no comments */
+                    <div className="text-center text-purple-200/60 text-xs py-4">
+                      <div className="text-2xl mb-2">💭</div>
+                      <div>No comments yet</div>
+                      <div className="text-purple-300/40 mt-1">
+                        Be the first to share your thoughts!
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Add Comment Input - Fixed at bottom */}
+                <div className="border-t border-purple-500/20 pt-3 flex-shrink-0">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Add a comment..."
+                      className="flex-1 px-3 py-2 text-xs rounded-lg border border-purple-500/30 bg-white/10 backdrop-blur-sm text-white placeholder-purple-200/60 focus:outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition-all duration-200"
+                    />
+                    <button className="px-3 py-2 text-xs font-bold bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all duration-200 shadow-lg shadow-purple-500/25">
+                      Post
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span>Format:</span>
-                <span>{format}</span>
+            </div>
+          ) : (
+            /* No Data Display for spots 15-100 */
+            <div className="space-y-3">
+              <div className="text-center">
+                <h3 className="text-lg font-bold text-white mb-2">
+                  Empty Spot #{selectedSpotNumber}
+                </h3>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  This spot in the MOONR sphere is currently empty and has no
+                  associated data or image.
+                </p>
               </div>
-              <div className="flex justify-between">
-                <span>Dimensions:</span>
-                <span>{dimensions}</span>
+
+              {/* Empty Status */}
+              <div className="bg-black/30 rounded-lg p-3 border border-gray-500/30">
+                <div className="text-sm font-bold text-gray-300 mb-2">
+                  Status
+                </div>
+                <div className="space-y-1 text-xs">
+                  <div>
+                    <span className="text-gray-400">Type:</span>
+                    <span className="text-white ml-1">Empty Spot</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-400">Position:</span>
+                    <span className="text-white ml-1">
+                      {selectedSpotNumber}/100
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-400">Data:</span>
+                    <span className="text-white ml-1">None available</span>
+                  </div>
+                </div>
               </div>
             </div>
           )}
         </div>
-      )}
-
-      {/* Buy Button */}
-      {orbNumber && !isOwned && (
-        <button className="btn btn-primary btn-xs mt-3 w-full text-xs">
-          Buy Now
-        </button>
+      ) : (
+        <div className="h-full flex items-center justify-center text-center">
+          <div>
+            <div className="text-6xl mb-4">🪐</div>
+            <h3 className="text-xl font-bold text-white mb-2">Select a Spot</h3>
+            <p className="text-purple-200 text-sm max-w-xs">
+              Click on any spot in the sphere to view its details. Spots 1-
+              {totalImages} have images and full data, spots {totalImages + 1}
+              -100 are empty.
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

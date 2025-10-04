@@ -1,0 +1,695 @@
+{
+  "spots": [
+    {
+      "id": 1,
+      "name": "Genesis Ring",
+      "description": "The first and most legendary ring in the MOONR sphere. This pristine cosmic formation holds the essence of creation itself.",
+      "imageUrl": "/src/assets/img1.png",
+      "owner": "0xA1B2...C3D4",
+      "views": 15420,
+      "likes": 892,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "CosmicExplorer42",
+          "text": "The first ring! This is where it all started. Incredible piece of history.",
+          "timestamp": "2m ago"
+        },
+        {
+          "id": 2,
+          "user": "StellarTrader",
+          "text": "Genesis Ring is absolutely stunning. Worth every SOL I paid for it!",
+          "timestamp": "15m ago"
+        },
+        {
+          "id": 3,
+          "user": "MoonRider88",
+          "text": "The legendary status is well deserved. Amazing cosmic energy here ✨",
+          "timestamp": "1h ago"
+        },
+        {
+          "id": 4,
+          "user": "VoidSeeker",
+          "text": "This is the crown jewel of my collection. Pure perfection!",
+          "timestamp": "2h ago"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Nebula Gate",
+      "description": "A swirling vortex of cosmic dust and starlight, serving as a gateway between dimensions.",
+      "imageUrl": "/src/assets/img2.png",
+      "owner": "0xE5F6...G7H8",
+      "views": 9873,
+      "likes": 654,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "NebulaExplorer",
+          "text": "The swirling patterns are mesmerizing! Love how the colors blend.",
+          "timestamp": "5m ago"
+        },
+        {
+          "id": 2,
+          "user": "AstralHunter",
+          "text": "Portal vibes! This feels like a gateway to another universe.",
+          "timestamp": "45m ago"
+        },
+        {
+          "id": 3,
+          "user": "DimensionWalker",
+          "text": "Perfect representation of interdimensional travel. Epic rarity!",
+          "timestamp": "3h ago"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Solar Crown",
+      "description": "Radiating pure solar energy, this ring embodies the power of a thousand suns.",
+      "imageUrl": "/src/assets/img3.png",
+      "owner": "0xI9J0...K1L2",
+      "views": 12456,
+      "likes": 743,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "SolarFlare",
+          "text": "The energy radiating from this is incredible! Feels like holding a star.",
+          "timestamp": "8m ago"
+        },
+        {
+          "id": 2,
+          "user": "LightBringer",
+          "text": "Magnificent solar patterns. This is what pure energy looks like!",
+          "timestamp": "1h ago"
+        },
+        {
+          "id": 3,
+          "user": "CosmicKing",
+          "text": "A crown worthy of a stellar emperor. Absolutely majestic!",
+          "timestamp": "4h ago"
+        },
+        {
+          "id": 4,
+          "user": "PhotonMaster",
+          "text": "The way light bends around this ring is pure physics poetry.",
+          "timestamp": "6h ago"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Void Echo",
+      "description": "Born from the silence between stars, this ring holds the mysteries of the cosmic void.",
+      "imageUrl": "/src/assets/img4.png",
+      "owner": "0xM3N4...O5P6",
+      "views": 7234,
+      "likes": 421,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "VoidWhisperer",
+          "text": "The silence speaks volumes. This ring captures the essence of the void perfectly.",
+          "timestamp": "12m ago"
+        },
+        {
+          "id": 2,
+          "user": "DarkMatter",
+          "text": "Mysterious and beautiful. The void has never looked so elegant.",
+          "timestamp": "2h ago"
+        },
+        {
+          "id": 3,
+          "user": "EchoHunter",
+          "text": "I can hear the cosmic whispers when I look at this. Hauntingly beautiful.",
+          "timestamp": "5h ago"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Crystal Harmony",
+      "description": "A perfectly crystallized formation that resonates with harmonic frequencies across the cosmos.",
+      "imageUrl": "/src/assets/img5.png",
+      "owner": "0xQ7R8...S9T0",
+      "views": 8891,
+      "likes": 567,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "CrystalSeer",
+          "text": "The harmonic resonance is incredible! I can feel the frequencies through the screen.",
+          "timestamp": "20m ago"
+        },
+        {
+          "id": 2,
+          "user": "FrequencyMaster",
+          "text": "Perfect geometric crystalline structure. Mathematics made beautiful!",
+          "timestamp": "1.5h ago"
+        },
+        {
+          "id": 3,
+          "user": "HarmonySeeker",
+          "text": "This brings such peace and balance. Crystal formations at their finest.",
+          "timestamp": "3h ago"
+        },
+        {
+          "id": 4,
+          "user": "ResonanceRider",
+          "text": "The way it vibrates with cosmic energy is mesmerizing. Pure harmony!",
+          "timestamp": "7h ago"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Quantum Storm",
+      "description": "A chaotic maelstrom of quantum particles dancing in impossible patterns.",
+      "imageUrl": "/src/assets/img6.png",
+      "owner": "0xU1V2...W3X4",
+      "views": 11267,
+      "likes": 689,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "QuantumPhysicist",
+          "text": "The particle patterns defy classical physics! This is quantum mechanics visualized.",
+          "timestamp": "6m ago"
+        },
+        {
+          "id": 2,
+          "user": "StormChaser",
+          "text": "Chaotic yet beautiful. The quantum storm is both terrifying and mesmerizing.",
+          "timestamp": "40m ago"
+        },
+        {
+          "id": 3,
+          "user": "ParticleWave",
+          "text": "Wave-particle duality at its finest. Science and art combined perfectly!",
+          "timestamp": "2h ago"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Lunar Whisper",
+      "description": "Soft and ethereal, this ring carries the gentle wisdom of ancient moons.",
+      "imageUrl": "/src/assets/img7.png",
+      "owner": "0xY5Z6...A7B8",
+      "views": 5643,
+      "likes": 334,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "MoonChild",
+          "text": "So peaceful and serene. The lunar energy is perfect for meditation.",
+          "timestamp": "30m ago"
+        },
+        {
+          "id": 2,
+          "user": "SilverLight",
+          "text": "Gentle whispers of ancient wisdom. This ring speaks to the soul.",
+          "timestamp": "2h ago"
+        },
+        {
+          "id": 3,
+          "user": "TideWatcher",
+          "text": "Beautiful lunar patterns. You can feel the gravitational pull of ancient moons.",
+          "timestamp": "4h ago"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Phoenix Flame",
+      "description": "An eternal flame that burns without consuming, symbolizing rebirth and renewal.",
+      "imageUrl": "/src/assets/img8.png",
+      "owner": "0xC9D0...E1F2",
+      "views": 18945,
+      "likes": 1124,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "PhoenixRising",
+          "text": "Eternal flame that never dies! This represents the cycle of rebirth perfectly.",
+          "timestamp": "3m ago"
+        },
+        {
+          "id": 2,
+          "user": "FlameKeeper",
+          "text": "The way the fire dances without consuming is pure magic. Legendary indeed!",
+          "timestamp": "25m ago"
+        },
+        {
+          "id": 3,
+          "user": "RenewalSeeker",
+          "text": "Symbol of hope and rebirth. This flame has guided me through dark times.",
+          "timestamp": "1h ago"
+        },
+        {
+          "id": 4,
+          "user": "EternalSpirit",
+          "text": "Magnificent representation of the phoenix legend. Burns bright forever!",
+          "timestamp": "3h ago"
+        },
+        {
+          "id": 5,
+          "user": "AshAndFire",
+          "text": "From ashes we rise! This flame never goes out, just like our spirits.",
+          "timestamp": "5h ago"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Stellar Forge",
+      "description": "Where new stars are born, this ring contains the raw materials of cosmic creation.",
+      "imageUrl": "/src/assets/img9.png",
+      "owner": "0xG3H4...I5J6",
+      "views": 10234,
+      "likes": 612,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "StarForger",
+          "text": "Witnessing stellar birth in real time! The forge is where magic happens.",
+          "timestamp": "18m ago"
+        },
+        {
+          "id": 2,
+          "user": "CosmicSmith",
+          "text": "The raw power of creation itself. Stars are born in places like this!",
+          "timestamp": "1h ago"
+        },
+        {
+          "id": 3,
+          "user": "NebulaCrafter",
+          "text": "Amazing stellar nursery! You can see new stars forming in the swirling matter.",
+          "timestamp": "4h ago"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Temporal Rift",
+      "description": "A tear in the fabric of time itself, showing glimpses of past and future.",
+      "imageUrl": "/src/assets/img10.png",
+      "owner": "0xK7L8...M9N0",
+      "views": 21367,
+      "likes": 1289,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "TimeWalker",
+          "text": "I can see echoes of past and future! This rift truly bends spacetime.",
+          "timestamp": "10m ago"
+        },
+        {
+          "id": 2,
+          "user": "ChronoMage",
+          "text": "Temporal mechanics at their finest. The fabric of reality is visible here!",
+          "timestamp": "35m ago"
+        },
+        {
+          "id": 3,
+          "user": "ParadoxSeeker",
+          "text": "Mind-bending! I think I saw my future self looking back at me through this rift.",
+          "timestamp": "2h ago"
+        },
+        {
+          "id": 4,
+          "user": "DimensionBender",
+          "text": "The way time flows around this ring defies comprehension. Legendary power!",
+          "timestamp": "6h ago"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Cosmic Web",
+      "description": "A intricate network connecting distant galaxies through invisible threads of dark matter.",
+      "imageUrl": "/src/assets/img11.png",
+      "owner": "0xO1P2...Q3R4",
+      "views": 6789,
+      "likes": 398,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "WebWeaver",
+          "text": "The cosmic web made visible! You can see the connections between galaxies.",
+          "timestamp": "22m ago"
+        },
+        {
+          "id": 2,
+          "user": "DarkMatterHunter",
+          "text": "Finally! A visualization of the invisible scaffolding of the universe.",
+          "timestamp": "1.5h ago"
+        },
+        {
+          "id": 3,
+          "user": "GalacticArchitect",
+          "text": "The blueprint of cosmic structure. This web holds everything together!",
+          "timestamp": "5h ago"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Aurora Crown",
+      "description": "Dancing lights that paint the cosmic sky with colors beyond imagination.",
+      "imageUrl": "/src/assets/img12.png",
+      "owner": "0xS5T6...U7V8",
+      "views": 5912,
+      "likes": 356,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "AuroraWatcher",
+          "text": "The dancing lights are hypnotic! Colors I've never seen before.",
+          "timestamp": "28m ago"
+        },
+        {
+          "id": 2,
+          "user": "LightDancer",
+          "text": "Pure cosmic ballet! The aurora patterns flow like celestial silk.",
+          "timestamp": "2h ago"
+        },
+        {
+          "id": 3,
+          "user": "SpectrumSeeker",
+          "text": "Beyond the visible spectrum! These colors exist only in cosmic auroras.",
+          "timestamp": "4h ago"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Gravity Well",
+      "description": "A dense concentration of mass that bends space-time around its core.",
+      "imageUrl": "/src/assets/img13.png",
+      "owner": "0xW9X0...Y1Z2",
+      "views": 13456,
+      "likes": 734,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "GravityMaster",
+          "text": "The spacetime curvature is incredible! You can see reality bending around it.",
+          "timestamp": "15m ago"
+        },
+        {
+          "id": 2,
+          "user": "MassAccumulator",
+          "text": "Dense enough to warp spacetime itself. The physics here are mind-blowing!",
+          "timestamp": "50m ago"
+        },
+        {
+          "id": 3,
+          "user": "EinsteinFollower",
+          "text": "General relativity visualized perfectly! This is what curved spacetime looks like.",
+          "timestamp": "3h ago"
+        },
+        {
+          "id": 4,
+          "user": "EventHorizon",
+          "text": "The gravitational field is so strong, even light struggles to escape!",
+          "timestamp": "7h ago"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Infinity Loop",
+      "description": "An endless cycle that represents the eternal nature of the universe itself.",
+      "imageUrl": "/src/assets/img14.png",
+      "owner": "0xA3B4...C5D6",
+      "views": 24789,
+      "likes": 1456,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "InfiniteSeeker",
+          "text": "The eternal loop! This represents the endless cycle of cosmic existence.",
+          "timestamp": "5m ago"
+        },
+        {
+          "id": 2,
+          "user": "CycleMaster",
+          "text": "No beginning, no end, just eternal flow. This is the universe in motion.",
+          "timestamp": "20m ago"
+        },
+        {
+          "id": 3,
+          "user": "EternalPhilosopher",
+          "text": "Contemplating infinity while staring at this. Deep cosmic meditation.",
+          "timestamp": "1h ago"
+        },
+        {
+          "id": 4,
+          "user": "LoopWalker",
+          "text": "I could follow this path forever and never reach the end. True infinity!",
+          "timestamp": "4h ago"
+        },
+        {
+          "id": 5,
+          "user": "CosmicCycle",
+          "text": "Birth, death, rebirth - all represented in this endless beautiful loop.",
+          "timestamp": "8h ago"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Starforge Nexus",
+      "description": "A cosmic factory where new stars are born from swirling clouds of stellar material and ancient stardust.",
+      "imageUrl": "/src/assets/img15.png",
+      "owner": "0xB7C8...D9E0",
+      "views": 9456,
+      "likes": 587,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "StellarFactory",
+          "text": "The stellar assembly line! Watching new stars being manufactured is incredible.",
+          "timestamp": "12m ago"
+        },
+        {
+          "id": 2,
+          "user": "NexusGuardian",
+          "text": "This nexus connects multiple star formation regions. Epic scale!",
+          "timestamp": "45m ago"
+        },
+        {
+          "id": 3,
+          "user": "StardustCollector",
+          "text": "Ancient stardust swirling into new stellar bodies. The circle of cosmic life!",
+          "timestamp": "3h ago"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Void Walker",
+      "description": "A mysterious entity that moves through the empty spaces between galaxies, leaving trails of dark energy.",
+      "imageUrl": "/src/assets/img16.png",
+      "owner": "0xF1A2...B3C4",
+      "views": 31567,
+      "likes": 1823,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "VoidTraveler",
+          "text": "Following the Walker's trail through the cosmic void. Mysterious and beautiful!",
+          "timestamp": "8m ago"
+        },
+        {
+          "id": 2,
+          "user": "DarkEnergyHunter",
+          "text": "The dark energy trails are visible! This entity shapes the void itself.",
+          "timestamp": "30m ago"
+        },
+        {
+          "id": 3,
+          "user": "IntergalacticNomad",
+          "text": "Wandering the spaces between galaxies. What ancient wisdom does it carry?",
+          "timestamp": "2h ago"
+        },
+        {
+          "id": 4,
+          "user": "CosmicGuide",
+          "text": "The Walker shows us paths through the void we never knew existed.",
+          "timestamp": "5h ago"
+        },
+        {
+          "id": 5,
+          "user": "VoidPhilosopher",
+          "text": "To walk in nothingness and leave traces of something. Legendary existence!",
+          "timestamp": "9h ago"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Prism Cascade",
+      "description": "A spectacular waterfall of light that splits cosmic rays into brilliant rainbow patterns across space.",
+      "imageUrl": "/src/assets/img17.png",
+      "owner": "0xD5E6...F7A8",
+      "views": 8234,
+      "likes": 445,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "LightSplitter",
+          "text": "Cosmic light refraction at its finest! Every ray tells a different story.",
+          "timestamp": "25m ago"
+        },
+        {
+          "id": 2,
+          "user": "RainbowCatcher",
+          "text": "The cascade creates patterns impossible to see on Earth. Cosmic art!",
+          "timestamp": "1h ago"
+        },
+        {
+          "id": 3,
+          "user": "SpectrumAnalyst",
+          "text": "Each color band reveals different cosmic radiation frequencies. Scientific beauty!",
+          "timestamp": "4h ago"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Quantum Anchor",
+      "description": "A stabilizing force that keeps reality tethered in this section of the multiverse, preventing dimensional drift.",
+      "imageUrl": "/src/assets/img18.png",
+      "owner": "0xA9B0...C1D2",
+      "views": 11892,
+      "likes": 678,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "RealityKeeper",
+          "text": "Without this anchor, our reality would drift into chaos. Essential cosmic infrastructure!",
+          "timestamp": "17m ago"
+        },
+        {
+          "id": 2,
+          "user": "DimensionStabilizer",
+          "text": "The quantum field stabilization is perfect. This keeps our universe coherent!",
+          "timestamp": "55m ago"
+        },
+        {
+          "id": 3,
+          "user": "MultiverseNavigator",
+          "text": "Fixed point in the multiverse! This anchor prevents dimensional collapse.",
+          "timestamp": "3h ago"
+        },
+        {
+          "id": 4,
+          "user": "CosmicEngineer",
+          "text": "The engineering behind this anchor is beyond comprehension. Epic technology!",
+          "timestamp": "6h ago"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Echo Chamber",
+      "description": "A resonant space where sound waves from the birth of the universe still reverberate through time.",
+      "imageUrl": "/src/assets/img19.png",
+      "owner": "0xE3F4...G5H6",
+      "views": 6789,
+      "likes": 389,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "CosmicListener",
+          "text": "I can hear the echoes of the Big Bang! The primordial sounds still resonate here.",
+          "timestamp": "35m ago"
+        },
+        {
+          "id": 2,
+          "user": "ResonanceHunter",
+          "text": "The acoustic properties are incredible. Sound waves from 13.8 billion years ago!",
+          "timestamp": "2h ago"
+        },
+        {
+          "id": 3,
+          "user": "UniverseWhisperer",
+          "text": "The universe is still talking, and this chamber preserves every word.",
+          "timestamp": "5h ago"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Genesis Spark",
+      "description": "The original spark that ignited this cosmic region, still burning with the pure energy of creation itself.",
+      "imageUrl": "/src/assets/img20.png",
+      "owner": "0xI7J8...K9L0",
+      "views": 45623,
+      "likes": 2456,
+      "commentsList": [
+        {
+          "id": 1,
+          "user": "CreationWitness",
+          "text": "The first spark! Everything in this region began with this incredible moment.",
+          "timestamp": "3m ago"
+        },
+        {
+          "id": 2,
+          "user": "OriginSeeker",
+          "text": "Pure creation energy still burning after eons. This is where it all started!",
+          "timestamp": "18m ago"
+        },
+        {
+          "id": 3,
+          "user": "BigBangExplorer",
+          "text": "Witnessing the moment of cosmic genesis. The spark that lit our universe!",
+          "timestamp": "42m ago"
+        },
+        {
+          "id": 4,
+          "user": "EnergyPure",
+          "text": "The power contained here could create galaxies. Genesis-level energy!",
+          "timestamp": "2h ago"
+        },
+        {
+          "id": 5,
+          "user": "CosmicArcheologist",
+          "text": "The oldest artifact in existence. This spark predates everything we know.",
+          "timestamp": "6h ago"
+        },
+        {
+          "id": 6,
+          "user": "UniverseFounder",
+          "text": "The crown jewel of creation! This spark birthed our cosmic neighborhood.",
+          "timestamp": "12h ago"
+        }
+      ]
+    }
+  ],
+  "emptySpotTemplate": {
+    "imageUrl": null,
+    "placeholderImages": [
+      "/src/assets/placeholders/cosmic-void.png",
+      "/src/assets/placeholders/stellar-dust.png",
+      "/src/assets/placeholders/galaxy-far.png",
+      "/src/assets/placeholders/nebula-edge.png",
+      "/src/assets/placeholders/dark-matter.png"
+    ]
+  },
+  "rarityDistribution": {
+    "Legendary": 6,
+    "Epic": 8,
+    "Rare": 4,
+    "Uncommon": 2
+  },
+  "totalValue": "94.7 SOL",
+  "totalViews": 287456,
+  "totalLikes": 16543,
+  "totalComments": 2387,
+  "totalItems": 100
+}
