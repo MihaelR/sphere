@@ -1,11 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { AppProvider } from "./context/AppContext";
-import Orb from "./components/Orb";
-import ImagesMarquee from "./components/ImagesMarquee";
+import { AppProvider, useAppContext } from "./context/AppContext";
 import Header from "./components/Header";
-import SphereSearch from "./components/SphereSearch";
 import SphereStats from "./components/SphereStats";
 import NewsUpdates from "./components/NewsUpdates";
 import SpotifyPlayer from "./components/SpotifyPlayer";
@@ -13,73 +10,55 @@ import Buy from "./pages/Buy";
 import About from "./pages/About";
 import Governance from "./pages/Governance";
 import Community from "./pages/Community";
-import ChatInfoTabs from "./components/ChatInfoTabs";
+import InfoTabs from "./components/InfoTabs";
 import TokenInfoTabs from "./components/TokenInfoTabs";
-import { useAppContext } from "./context/AppContext";
+import FirebaseChat from "./components/FirebaseChat";
+import MoonInteractiveSVG from "./components/MoonInteractiveSVG";
+import WalletConnectPanel from "./components/WalletConnectPanel";
+import Marquee from "./components/Marquee";
 
 function SphereMain() {
-  const {
-    selected,
-    totalImages,
-    totalItems,
-    handleMarqueeImageClick,
-    setSelected,
-  } = useAppContext();
-
+  const { spotData, handleMarqueeImageClick } = useAppContext();
   return (
     <div className="main-content">
-      <div id="stars"></div>
+      {/*       <div id="stars"></div>
       <div id="stars2"></div>
-      <div id="stars3"></div>
-
-      {/* Marquee directly below header */}
+      <div id="stars3"></div> */}
       <div className="marquee-below-header">
-        <ImagesMarquee
-          totalImages={totalImages}
-          onImageClick={handleMarqueeImageClick}
-        />
+        <Marquee spotData={spotData} onImageClick={handleMarqueeImageClick} />
       </div>
-
       {/* Main layout: Left (Token+Search) | Center sphere | Right (Combined Chat+Info) */}
       <div className="sphere-main-layout">
         {/* Left Sidebar: Token Info + Top Holders tabs, Search bottom */}
         <div className="left-sidebar">
-          {/* Token Info + Top Holders Tabs */}
           <div className="mb-4">
-            <TokenInfoTabs />
+            {" "}
+            <TokenInfoTabs />{" "}
           </div>
-
+          <WalletConnectPanel />
           {/* Search */}
-          <div>
-            <SphereSearch />
-          </div>
+          <div>Airdrop info</div>
         </div>
 
-        {/* Center: Big Sphere Container */}
-        <div className="center-sphere-container">
-          {/* Orb */}
-          <div className="orb-wrapper">
-            <Orb
-              selected={selected}
-              setSelected={setSelected}
-              totalImages={totalImages}
-              totalItems={totalItems}
-            />
-          </div>
-
-          {/* Stats below sphere */}
-          <div className="stats-container">
-            <SphereStats />
-          </div>
+        {/* Center: MoonInteractiveSVG */}
+        <div
+          className="center-sphere-container"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <MoonInteractiveSVG />
+          <FirebaseChat />
         </div>
 
         {/* Right Sidebar: Combined Chat + Info Panel with Tabs */}
         <div className="right-sidebar">
-          <ChatInfoTabs />
+          {" "}
+          <InfoTabs />{" "}
         </div>
       </div>
-
-      <NewsUpdates />
     </div>
   );
 }
@@ -91,15 +70,16 @@ export default function App() {
         <div className="App">
           <Header />
           {/* Global Music Player - appears on all pages */}
-          <SpotifyPlayer />
+          {/*  <SpotifyPlayer /> */}
 
           <main className="app-main">
             <Routes>
               <Route path="/" element={<SphereMain />} />
-              <Route path="/buy" element={<Buy />} />
               <Route path="/about" element={<About />} />
+              <Route path="/buy" element={<Buy />} />
               <Route path="/governance" element={<Governance />} />
               <Route path="/community" element={<Community />} />
+              <Route path="/ads" element={<Community />} />
             </Routes>
           </main>
         </div>

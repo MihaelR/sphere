@@ -15,11 +15,11 @@ export default function FirebaseChat({ isTabbed = false }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [user, setUser] = useState(null);
-  const [onlineUsers, setOnlineUsers] = useState(1);
   const [loading, setLoading] = useState(true);
   const [showNameChanger, setShowNameChanger] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [minimized, setMinimized] = useState(false);
   const chatRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -128,7 +128,7 @@ export default function FirebaseChat({ isTabbed = false }) {
       if (chatRef.current) {
         chatRef.current.scrollTop = chatRef.current.scrollHeight;
       }
-    }, 100);
+    }, 1000);
 
     return () => {
       if (scrollTimeoutRef.current) {
@@ -161,7 +161,7 @@ export default function FirebaseChat({ isTabbed = false }) {
 
   // Listen to messages - optimized with better error handling
   useEffect(() => {
-    if (!user) return;
+    if (!user || minimized) return;
 
     const messagesRef = collection(db, "chat-messages");
     const q = query(messagesRef, orderBy("timestamp", "desc"), limit(25)); // Reduced from 50 to 25
@@ -186,7 +186,7 @@ export default function FirebaseChat({ isTabbed = false }) {
     );
 
     return () => unsubscribe();
-  }, [user]);
+  }, [user, minimized]);
 
   // Send message
   const handleSendMessage = async (e) => {
@@ -239,7 +239,7 @@ export default function FirebaseChat({ isTabbed = false }) {
     if (messageUserId === user?.uid) {
       return "bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-500/30 text-blue-100 ml-6 shadow-lg shadow-blue-500/10";
     }
-    return "bg-base-200/60 backdrop-blur-sm border-base-content/20 text-base-content/90 hover:bg-base-200/80 transition-all duration-200";
+    return "bg-base-200/60  border-base-content/20 text-base-content/90 hover:bg-base-200/80 transition-all duration-200";
   };
 
   // Quick emoji reactions
@@ -258,7 +258,7 @@ export default function FirebaseChat({ isTabbed = false }) {
 
   if (loading) {
     return (
-      <div className="w-64 h-80 rounded-xl bg-gradient-to-br from-purple-900/20 via-blue-900/30 to-purple-900/20 backdrop-blur-lg border border-purple-500/30 shadow-xl flex items-center justify-center">
+      <div className="w-64 h-80 rounded-xl bg-gradient-to-br from-purple-900/20 via-blue-900/30 to-purple-900/20  border border-purple-500/30 shadow-xl flex items-center justify-center">
         <div className="text-center">
           <div className="w-10 h-10 border-3 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
           <p className="text-sm text-purple-200 font-medium">
@@ -272,6 +272,37 @@ export default function FirebaseChat({ isTabbed = false }) {
     );
   }
 
+  if (minimized) {
+    return (
+      <div
+        style={{
+          position: "fixed",
+          bottom: 24,
+          right: 24,
+          zIndex: 100,
+        }}
+      >
+        <button
+          onClick={() => setMinimized(false)}
+          style={{
+            background: "linear-gradient(45deg, #a78bfa, #60a5fa)",
+            color: "#fff",
+            borderRadius: "50%",
+            width: 48,
+            height: 48,
+            boxShadow: "0 2px 8px #0006",
+            border: "none",
+            fontSize: 24,
+            cursor: "pointer",
+          }}
+          title="Open Chat"
+        >
+          💬
+        </button>
+      </div>
+    );
+  }
+
   // Conditional wrapper - if tabbed, don't add the header/wrapper
   if (isTabbed) {
     return (
@@ -279,7 +310,7 @@ export default function FirebaseChat({ isTabbed = false }) {
         {/* Chat Messages - Fixed height and scrolling */}
         <div
           ref={chatRef}
-          className="flex-1 overflow-y-auto p-3 space-y-2 bg-black/20 backdrop-blur-sm min-h-0"
+          className="flex-1 overflow-y-auto p-3 space-y-2 bg-black/20  min-h-0"
           style={{
             maxHeight: "calc(100vh - 300px)",
             scrollbarWidth: "thin",
@@ -328,7 +359,7 @@ export default function FirebaseChat({ isTabbed = false }) {
 
           {/* Typing indicator */}
           {isTyping && (
-            <div className="bg-base-200/40 backdrop-blur-sm rounded-lg p-2 border border-base-content/10">
+            <div className="bg-base-200/40  rounded-lg p-2 border border-base-content/10">
               <div className="flex items-center gap-1.5">
                 <span className="text-sm">💭</span>
                 <div className="flex-1">
@@ -353,27 +384,7 @@ export default function FirebaseChat({ isTabbed = false }) {
         </div>
 
         {/* Message Input */}
-        <div className="p-3 border-t border-purple-500/30 bg-black/20 backdrop-blur-sm flex-shrink-0">
-          {/* Quick emoji bar */}
-          {showEmojiPicker && (
-            <div className="mb-2 flex gap-1 p-2 bg-white/10 backdrop-blur-sm rounded border border-white/20">
-              {quickEmojis.map((emoji) => (
-                <button
-                  key={emoji}
-                  type="button"
-                  onClick={() => {
-                    setNewMessage((prev) => prev + emoji);
-                    setShowEmojiPicker(false);
-                    inputRef.current?.focus();
-                  }}
-                  className="text-base hover:scale-125 transition-transform duration-200 hover:bg-white/20 rounded p-1"
-                >
-                  {emoji}
-                </button>
-              ))}
-            </div>
-          )}
-
+        <div className="p-3 border-t border-purple-500/30 bg-black/20  flex-shrink-0">
           <form onSubmit={handleSendMessage} className="space-y-2">
             <div className="relative">
               <input
@@ -382,7 +393,7 @@ export default function FirebaseChat({ isTabbed = false }) {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="Type a message..."
-                className="w-full px-3 py-2 text-sm rounded border border-purple-500/30 bg-white/10 backdrop-blur-sm text-white placeholder-purple-200/60 focus:outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition-all duration-200"
+                className="w-full px-3 py-2 text-sm rounded border border-purple-500/30 bg-white/10  text-white placeholder-purple-200/60 focus:outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition-all duration-200"
                 maxLength={200}
                 disabled={!user}
               />
@@ -418,52 +429,37 @@ export default function FirebaseChat({ isTabbed = false }) {
 
   // Regular standalone component (existing code)
   return (
-    <div className="w-64 min-w-0 max-w-full rounded-xl shadow-2xl overflow-hidden bg-gradient-to-br from-purple-900/20 via-blue-900/30 to-purple-900/20 backdrop-blur-lg border border-purple-500/30 flex flex-col h-80 max-h-[900px]">
+    <div className="fixed bottom-0 w-64 min-w-0 max-w-full rounded-xl shadow-2xl overflow-hidden bg-gradient-to-br from-purple-900/20 via-blue-900/30 to-purple-900/20  border border-purple-500/30 flex flex-col h-90 ">
       {/* Header - Same height as info panel title */}
-      <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 p-3 text-white flex-shrink-0 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/10"></div>
-        <div className="relative z-10">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="relative">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
-                <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
-              </div>
-              <div>
-                <span className="font-bold text-base tracking-wide">
-                  MOONR Chat
-                </span>
-              </div>
+      <div className="p-2 text-white flex-shrink-0 relative overflow-hidden">
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <div className="relative">
+              <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
+              <div className="absolute inset-0 w-1.5 h-1.5 bg-green-400 rounded-full animate-ping"></div>
             </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setShowNameChanger(!showNameChanger)}
-                className="p-1.5 bg-white/20 hover:bg-white/30 rounded transition-all duration-200 backdrop-blur-sm"
-                title="Change username"
-              >
-                <span className="text-sm">🎭</span>
-              </button>
-
-              <div className="flex items-center gap-1 bg-white/20 px-2 py-1 rounded-full backdrop-blur-sm">
-                <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
-                <span className="text-sm font-mono">{messages.length}</span>
-              </div>
-            </div>
+            <span className="font-bold text-sm tracking-wide">Live Chat</span>
           </div>
-
-          {/* User info */}
-          <div className="mt-2 flex items-center gap-2 text-sm text-white/90">
-            <span>{user?.avatar}</span>
-            <span className="font-medium truncate">{user?.name}</span>
-            <span className="text-white/60">•</span>
-            <span className="text-white/60">{onlineUsers} online</span>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => setMinimized(true)}
+              style={{
+                background: "transparent",
+                border: "none",
+                color: "#fff",
+                fontSize: 18,
+                marginLeft: 8,
+                cursor: "pointer",
+              }}
+              title="Minimize Chat"
+            >
+              &minus;
+            </button>
           </div>
         </div>
-
         {/* Name changer dropdown */}
         {showNameChanger && (
-          <div className="absolute top-full left-2 right-2 mt-1 p-3 bg-white/95 backdrop-blur-lg rounded-lg border border-white/20 shadow-xl z-50">
+          <div className="absolute top-full left-2 right-2 mt-1 p-3 bg-white/95  rounded-lg border border-white/20 shadow-xl z-50">
             <div className="text-sm text-gray-700 mb-2 font-medium">
               Current: {user?.avatar} {user?.name}
             </div>
@@ -480,7 +476,7 @@ export default function FirebaseChat({ isTabbed = false }) {
       {/* Chat Messages - Fixed height and scrolling */}
       <div
         ref={chatRef}
-        className="flex-1 overflow-y-auto p-3 space-y-2 bg-black/20 backdrop-blur-sm min-h-0"
+        className="flex-1 overflow-y-auto p-3 space-y-2 bg-black/20  min-h-0"
         style={{
           scrollbarWidth: "thin",
           scrollbarColor: "rgba(168, 85, 247, 0.5) transparent",
@@ -528,7 +524,7 @@ export default function FirebaseChat({ isTabbed = false }) {
 
         {/* Typing indicator */}
         {isTyping && (
-          <div className="bg-base-200/40 backdrop-blur-sm rounded-lg p-2 border border-base-content/10">
+          <div className="bg-base-200/40  rounded-lg p-2 border border-base-content/10">
             <div className="flex items-center gap-1.5">
               <span className="text-sm">💭</span>
               <div className="flex-1">
@@ -553,10 +549,10 @@ export default function FirebaseChat({ isTabbed = false }) {
       </div>
 
       {/* Message Input */}
-      <div className="p-3 border-t border-purple-500/30 bg-black/20 backdrop-blur-sm flex-shrink-0">
+      <div className="p-3 border-t border-purple-500/30 bg-black/20  flex-shrink-0">
         {/* Quick emoji bar */}
         {showEmojiPicker && (
-          <div className="mb-2 flex gap-1 p-2 bg-white/10 backdrop-blur-sm rounded border border-white/20">
+          <div className="mb-2 flex gap-1 p-2 bg-white/10  rounded border border-white/20">
             {quickEmojis.map((emoji) => (
               <button
                 key={emoji}
@@ -582,7 +578,7 @@ export default function FirebaseChat({ isTabbed = false }) {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Type a message..."
-              className="w-full px-3 py-2 text-sm rounded border border-purple-500/30 bg-white/10 backdrop-blur-sm text-white placeholder-purple-200/60 focus:outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition-all duration-200"
+              className="w-full px-3 py-2 text-sm rounded border border-purple-500/30 bg-white/10  text-white placeholder-purple-200/60 focus:outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition-all duration-200"
               maxLength={200}
               disabled={!user}
             />
@@ -604,11 +600,6 @@ export default function FirebaseChat({ isTabbed = false }) {
                 💫
               </button>
             </div>
-          </div>
-
-          <div className="flex items-center justify-between text-xs text-purple-200/60">
-            <span>Enter to send • {200 - newMessage.length} chars</span>
-            <span className="font-mono">Global</span>
           </div>
         </form>
       </div>

@@ -19,36 +19,32 @@ export default function TokenInfoTabs() {
   ];
 
   return (
-    <div className="w-full h-full rounded-xl shadow-2xl overflow-hidden bg-gradient-to-br from-purple-900/20 via-blue-900/30 to-purple-900/20 backdrop-blur-lg border border-purple-500/30 flex flex-col">
-      {/* Tab Header - Made smaller */}
-      <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 p-2 text-white flex-shrink-0 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/10"></div>
-        <div className="relative z-10">
-          {/* Tab Buttons - Smaller */}
-          <div className="flex bg-black/30 backdrop-blur-sm rounded-lg overflow-hidden">
-            <button
-              onClick={() => setActiveTab("info")}
-              className={`flex-1 px-2 py-1.5 text-xs font-bold transition-all duration-300 flex items-center justify-center gap-1.5 ${
-                activeTab === "info"
-                  ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg"
-                  : "text-white/70 hover:text-white hover:bg-white/10"
-              }`}
-            >
-              <span className="text-sm">💰</span>
-              <span>Token Info</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("holders")}
-              className={`flex-1 px-2 py-1.5 text-xs font-bold transition-all duration-300 flex items-center justify-center gap-1.5 ${
-                activeTab === "holders"
-                  ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg"
-                  : "text-white/70 hover:text-white hover:bg-white/10"
-              }`}
-            >
-              <span className="text-sm">👑</span>
-              <span>Top Holders</span>
-            </button>
-          </div>
+    <div className="w-full h-full rounded-xl border border-purple-500/30 bg-[#181825] flex flex-col">
+      {/* Tab Header */}
+      <div className="bg-[#23284a] p-2 text-white flex-shrink-0">
+        <div className="flex rounded-lg overflow-hidden">
+          <button
+            onClick={() => setActiveTab("info")}
+            className={`flex-1 px-2 py-1.5 text-xs font-bold flex items-center justify-center gap-1.5 ${
+              activeTab === "info"
+                ? "bg-purple-700 text-white"
+                : "text-white/70 hover:text-white hover:bg-white/10"
+            }`}
+          >
+            <span className="text-sm">💰</span>
+            <span>Token Info</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("holders")}
+            className={`flex-1 px-2 py-1.5 text-xs font-bold flex items-center justify-center gap-1.5 ${
+              activeTab === "holders"
+                ? "bg-purple-700 text-white"
+                : "text-white/70 hover:text-white hover:bg-white/10"
+            }`}
+          >
+            <span className="text-sm">👑</span>
+            <span>Top Holders</span>
+          </button>
         </div>
       </div>
 
@@ -81,12 +77,12 @@ export default function TokenInfoTabs() {
                 {topHolders.map((holder, index) => (
                   <div
                     key={holder.address}
-                    className="bg-black/30 rounded-lg p-2.5 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-200 hover:bg-black/40"
+                    className="bg-[#23284a] rounded-lg p-2.5 border border-purple-500/30 hover:border-purple-400/50 hover:bg-[#23284a]/80"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         {/* Rank - smaller */}
-                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 text-white font-bold text-xs">
+                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-purple-700 text-white font-bold text-xs">
                           #{index + 1}
                         </div>
 
@@ -110,7 +106,7 @@ export default function TokenInfoTabs() {
               {/* Summary - simplified */}
               <div className="mt-3 pt-2 border-t border-purple-500/30">
                 <div className="text-center">
-                  <div className="bg-black/20 rounded-lg p-2">
+                  <div className="bg-[#23284a] rounded-lg p-2">
                     <div className="text-sm font-bold text-cyan-400">
                       98 Total Holders
                     </div>

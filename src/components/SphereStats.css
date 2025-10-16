@@ -1,3 +1,20 @@
 .w-72 {
   background: rgba(30, 32, 40, 0.45) !important;
 }
+
+.sphere-stats-bar {
+  background: rgba(30, 32, 40, 0.45) !important;
+  font-size: 0.95rem;
+  min-height: unset;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  margin: 0.5rem 0;
+  gap: 2rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
